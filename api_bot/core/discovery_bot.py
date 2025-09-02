@@ -1,5 +1,6 @@
 import json
 from collections import Counter
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Any
 
@@ -57,6 +58,11 @@ class ComprehensiveAPIBot:
             }
         ]
 
+        # Record of past searches.  Each entry stores the query and the time at
+        # which it was executed.  The in-memory log is sufficient for tests and
+        # enables statistics about recent activity.
+        self.search_history: List[Dict[str, str]] = []
+
     # ------------------------------------------------------------------
     # Search and formatting helpers
     # ------------------------------------------------------------------
@@ -72,6 +78,12 @@ class ComprehensiveAPIBot:
             api for api in self.apis
             if query_lower in api["name"].lower() or query_lower in api["description"].lower()
         ]
+
+        # Log the search so that statistics such as "searches this week" can be
+        # reported.  Storing the original query makes it possible to expose a
+        # history to the user interface.
+        self.search_history.append({"query": query, "timestamp": datetime.utcnow().isoformat()})
+
         # Results are grouped by a source key.  Using a single ``catalog`` source
         # keeps the structure compatible with the CLI.
         return {"catalog": matches}
@@ -117,14 +129,24 @@ class ComprehensiveAPIBot:
         """
         total = len(self.apis)
         by_category = Counter(api.get("category", "Unknown") for api in self.apis)
+
+        # Determine how many searches occurred within the last seven days.
+        week_ago = datetime.utcnow() - timedelta(days=7)
+        recent_count = sum(
+            1
+            for entry in self.search_history
+            if datetime.fromisoformat(entry["timestamp"]) >= week_ago
+        )
+
         stats = {
             "total_apis": total,
             "by_category": dict(by_category),
             # In this simplified implementation everything comes from the same
             # in-memory catalog.
             "by_source": {"catalog": total},
-            # Placeholder metric used by the CLI
-            "searches_last_week": 0,
+            "searches_last_week": recent_count,
+            # Small list of the most recent queries (most recent first)
+            "recent_searches": [entry["query"] for entry in self.search_history[-5:]][::-1],
         }
         return stats
 

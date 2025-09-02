@@ -296,6 +296,12 @@ class CLI:
 **📈 Recent Activity:**
    • Searches this week: {stats.get('searches_last_week', 0)}
 """
+
+            recent = stats.get('recent_searches')
+            if recent:
+                stats_text += "\n**🕘 Recent Searches:**\n"
+                for query in recent:
+                    stats_text += f"   • {query}\n"
             if self.console:
                 self.console.print(Markdown(stats_text))
             else:  # pragma: no cover
