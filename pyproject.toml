@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "api-botpi"
-version = "0.1.4"
+version = "0.1.5"
 description = "Minimal API-BOTPI package"
 authors = [{name = "API-BOTPI", email = "example@example.com"}]
 readme = "README.md"

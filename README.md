@@ -46,6 +46,12 @@ If the console script is unavailable, you can run the module directly:
 python -m apibotpi.search --public
 ```
 
+Prefer no‑auth APIs and export results to CSV:
+
+```bash
+api-search --no-auth --format csv > apis.csv
+```
+
 Let the tool guide you interactively:
 
 ```bash
@@ -57,7 +63,13 @@ api-search --wizard
 Fetch a sample response from an API without writing any code:
 
 ```bash
-api-call "Cat Facts"
+api-call "Cat Facts" --param animal=cat
+```
+
+The call helper enforces HTTPS and retries with backoff. You can pass headers or custom timeouts, for example:
+
+```bash
+api-call "Cat Facts" --header "Accept: application/json" --timeout 10
 ```
 
 ## Beginner-friendly APIs
@@ -92,7 +104,7 @@ Instead of editing the registry by hand, install an OpenAPI or JSON spec directl
 install-api path-or-url-to-spec
 ```
 
-The command deduplicates entries based on name and host before appending them to `apibotpi/apis.json`.
+Records are validated and written atomically to avoid corrupting the registry. Entries are deduplicated by name and host.
 
 ## SQL snippets
 
