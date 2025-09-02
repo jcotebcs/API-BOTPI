@@ -60,6 +60,14 @@ Fetch a sample response from an API without writing any code:
 api-call "Cat Facts"
 ```
 
+## Beginner-friendly APIs
+
+List free APIs that work without keys:
+
+```bash
+api-beginner list --free --test-mode
+```
+
 ## Adding a new API
 
 API information lives in `apibotpi/apis.json`. Each entry looks like:
