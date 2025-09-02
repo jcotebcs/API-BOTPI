@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Cat Facts",
+    "description": "Random cat trivia",
+    "quota": "unlimited",
+    "public_domain": true,
+    "url": "https://catfact.ninja/fact"
+  },
+  {
+    "name": "OpenWeather",
+    "description": "Weather data API",
+    "quota": "60 calls/minute",
+    "public_domain": false,
+    "url": "https://api.openweathermap.org/data/2.5/weather?q=London&appid=demo"
+  },
+  {
+    "name": "SpaceX",
+    "description": "SpaceX launch data",
+    "quota": "free",
+    "public_domain": true,
+    "url": "https://api.spacexdata.com/v4/launches/latest"
+  }
+]
