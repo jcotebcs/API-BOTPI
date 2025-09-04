@@ -1,0 +1,15 @@
+ALTER TABLE apis ADD COLUMN onboarding_score REAL;
+ALTER TABLE apis ADD COLUMN learn_time_minutes INTEGER;
+ALTER TABLE apis ADD COLUMN sandbox_url TEXT;
+ALTER TABLE apis ADD COLUMN quickstart_url TEXT;
+ALTER TABLE apis ADD COLUMN dangerous BOOLEAN DEFAULT 0;
+ALTER TABLE apis ADD COLUMN mock_supported BOOLEAN DEFAULT 0;
+ALTER TABLE apis ADD COLUMN approval_sla_days INTEGER;
+ALTER TABLE apis ADD COLUMN tutorial_quality_score REAL;
+ALTER TABLE apis ADD COLUMN examples_count INTEGER;
+ALTER TABLE apis ADD COLUMN endpoints_count INTEGER;
+ALTER TABLE apis ADD COLUMN has_postman BOOLEAN DEFAULT 0;
+ALTER TABLE apis ADD COLUMN has_sdk BOOLEAN DEFAULT 0;
+ALTER TABLE apis ADD COLUMN error_model_quality TEXT;
+ALTER TABLE apis ADD COLUMN auth_complexity TEXT;
+ALTER TABLE apis ADD COLUMN first_success_rate REAL;

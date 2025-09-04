@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "api-botpi"
+version = "0.1.5"
+description = "Minimal API-BOTPI package"
+authors = [{name = "API-BOTPI", email = "example@example.com"}]
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+dependencies = ["click", "PyYAML", "requests", "tabulate"]
+
+[project.scripts]
+api-search = "apibotpi.search:main"
+api-call = "apibotpi.call:main"
+install-api = "apibotpi.install_api:main"
+api-beginner = "apibotpi.beginner:main"
+
+[tool.setuptools.package-data]
+apibotpi = ["apis.json"]
+
+[tool.setuptools.packages.find]
+include = ["apibotpi"]
